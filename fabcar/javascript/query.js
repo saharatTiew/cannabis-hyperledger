@@ -10,7 +10,6 @@ const { Gateway, Wallets } = require('fabric-network');
 const path = require('path');
 const fs = require('fs');
 
-
 async function main() {
     try {
         // load the network configuration
@@ -43,7 +42,11 @@ async function main() {
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        const result = await contract.evaluateTransaction('queryAllCars');
+        // const result = await contract.evaluateTransaction('queryAllCars');
+        const result = await contract.evaluateTransaction('queryAllPackages');
+        await contract.submitTransaction('createCar', 'CAR4', 'Honda', 'Accord', 'Black', 'Tom');
+        const result2 = await contract.evaluateTransaction('queryCar', 'CAR4');
+        // console.log(`${result2.toString()}`);
         console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
         // Disconnect from the gateway.

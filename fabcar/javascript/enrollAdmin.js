@@ -29,13 +29,15 @@ async function main() {
 
         // Check to see if we've already enrolled the admin user.
         const identity = await wallet.get('admin');
+        console.log(`identity : ${identity}`);
         if (identity) {
             console.log('An identity for the admin user "admin" already exists in the wallet');
             return;
         }
-
+        console.log('s')
         // Enroll the admin user, and import the new identity into the wallet.
         const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });
+        console.log('a')
         const x509Identity = {
             credentials: {
                 certificate: enrollment.certificate,
@@ -44,6 +46,7 @@ async function main() {
             mspId: 'Org1MSP',
             type: 'X.509',
         };
+        console.log('b');
         await wallet.put('admin', x509Identity);
         console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
 

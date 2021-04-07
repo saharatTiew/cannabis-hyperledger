@@ -46,7 +46,7 @@ async function main() {
         // await contract.submitTransaction('changeCarOwner', 'CAR12', 'Dave');
         console.log('a');
         const date = new Date();
-        await contract.submitTransaction('createTransactions', 'david', '222 S', 40.00, 'PACKAGES000', date.toISOString(), date.valueOf());
+        await contract.submitTransaction('createTransactions', 'david', '222 S', 'PACKAGES000', date.toISOString(), date.valueOf());
         console.log('b');
         const a = await contract.evaluateTransaction('queryAllTransactions', 'david');
         console.log(a.toString());

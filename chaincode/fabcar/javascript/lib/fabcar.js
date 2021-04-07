@@ -142,13 +142,13 @@ class FabCar extends Contract {
     async queryTransactions(ctx, transactionKey) {
         const transactionAsBytes = await ctx.stub.getState(transactionKey); // get the car from chaincode state
         if (!transactionAsBytes || transactionAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
+            throw new Error(`${transactionKey} does not exist`);
         }
         console.log('transactions', transactionAsBytes.toString());
         return transactionAsBytes.toString();
     }
 
-    async createTransactions(ctx, customerName, customerAddress, productQuality, packageId, dateTime, dateUnix) {
+    async createTransactions(ctx, customerName, customerAddress, packageId, dateTime, dateUnix) {
         console.info('============= START : Create Car ===========');
         console.log('packageId : ', packageId);
         const packages = JSON.parse(await this.queryPackage(ctx, packageId));
@@ -159,12 +159,13 @@ class FabCar extends Contract {
             customerName,
             // docType: 'cannabis',
             customerAddress,
-            productQuality,
-            packageId,
+            packages,
+            // productQuality,
+            // packageId,
             transaction: 
             [
                 {
-                    fromName: packages.name,
+                    fromName: packages.store,
                     fromLocation: packages.location,
                     timeStamp: dateTime,
                     receiverName: 'North Warehouse',

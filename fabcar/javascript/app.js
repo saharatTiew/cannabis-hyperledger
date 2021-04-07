@@ -50,19 +50,26 @@ async function main() {
             res.json(JSON.parse(result.toString()));
         })
 
-        app.post('/transaction', async (req, res) => {
-            let transactionKey = req.query.transactionkey;
-            const result = await contract.evaluateTransaction('queryTransactions', transactionKey);
-            res.json(JSON.parse(result.toString()));
+        app.get('/transaction', async (req, res) => {
+            try
+            {
+                let transactionKey = req.query.transactionkey;
+                const result = await contract.evaluateTransaction('queryTransactions', transactionKey);
+                res.json(JSON.parse(result.toString()));
+            }
+            catch (error)
+            {
+                res.status(500).send('error');
+            }
         })
 
         app.post('/create-transaction', async (req, res) => {
             let customerName = req.body.username;
             let customerAddress = req.body.address;
-            let productQuality = req.body.quality;
+            // let productQuality = req.body.quality;
             let packageId = req.body.packageId;
             let date = new Date();
-            await contract.submitTransaction('createTransactions', customerName, customerAddress, productQuality, packageId, date.toISOString(), date.valueOf());
+            await contract.submitTransaction('createTransactions', customerName, customerAddress, packageId, date.toISOString(), date.valueOf());
             res.json();
         })
 

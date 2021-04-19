@@ -87,16 +87,26 @@ infoln "Creating channel ${CHANNEL_NAME}"
 createChannel
 successln "Channel '$CHANNEL_NAME' created"
 
-## Join all the peers to the channel
-infoln "Joining org1 peer to the channel..."
-joinChannel 1
-infoln "Joining org2 peer to the channel..."
-joinChannel 2
+if [ "$CHANNEL_NAME" = "mychannel" ]; then
+	## Join all the peers to the channel
+	infoln "Joining org1 peer to the channel..."
+	joinChannel 1
+	infoln "Joining org2 peer to the channel..."
+	joinChannel 2
 
-## Set the anchor peers for each org in the channel
-infoln "Setting anchor peer for org1..."
-setAnchorPeer 1
-infoln "Setting anchor peer for org2..."
-setAnchorPeer 2
+	## Set the anchor peers for each org in the channel
+	infoln "Setting anchor peer for org1..."
+	setAnchorPeer 1
+	infoln "Setting anchor peer for org2..."
+	setAnchorPeer 2
+else
+	## Join all the peers to the channel
+	infoln "Joining org2 peer to the channel..."
+	joinChannel 2
+
+	## Set the anchor peers for each org in the channel
+	infoln "Setting anchor peer for org2..."
+	setAnchorPeer2
+fi
 
 successln "Channel '$CHANNEL_NAME' joined"

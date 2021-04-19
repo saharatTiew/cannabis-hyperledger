@@ -12,33 +12,7 @@ class FabCar extends Contract {
 
     async initLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
-        // const packages = [
-        //     {
-        //         name: 'Big Package',
-        //         description: 'Cannabis 100g, pure 100%',
-        //         store: 'Cannabis Happy Store',
-        //         location: '221B Burger Street'
-        //     },
-        //     {
-        //         name: 'Medium Package',
-        //         description: 'Description',
-        //         store: 'Cannabis Happy Store',
-        //         location: 'Asgard'
-        //     },
-        //     {
-        //         name: 'Small Package',
-        //         description: 'Description',
-        //         store: 'Cannabis Happy Store',
-        //         location: 'Wakanda'
-        //     },
-        //     {
-        //         name: 'Mixed Package',
-        //         description: 'Description',
-        //         store: 'Cannabis Happy Store',
-        //         location: 'Atlantis'
-        //     }
-        // ];
-
+    
         const packages = [
             {
                 name: 'Big Package',
@@ -167,7 +141,7 @@ class FabCar extends Contract {
                 {
                     fromName: packages.store,
                     fromLocation: packages.location,
-                    timeStamp: dateTime,
+                    timestamp: dateTime,
                     receiverName: 'North Warehouse',
                     receiverAddress: 'Unsuspicious House'
                 }
